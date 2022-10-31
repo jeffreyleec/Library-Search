@@ -1,10 +1,11 @@
 
-import "./App.css";
 import React from "react";
 import Table from "./Components/Table";
 import {tableData} from "./Components/data"
+import SetLists from "./Components/SetsList";
 
 function App() {
+
   const columns = [
     { field: "id", header: "#" },
     { field: "name", header: "Name" },
@@ -16,6 +17,7 @@ function App() {
     <>
     {/* <p>test</p>  */}
     <Table data={tableData} columns={columns}/>
+    <SetLists />
     </>
    
   );

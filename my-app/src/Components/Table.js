@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { createRoutesFromElements } from "react-router-dom";
+import "./Table.css"
 
-export default function Table({ data, columns }) {
+export default function Table({ data=null, columns=null, hover = true, striped = true }) {
   const getCaps = (head, field) => {
     if (head) return head.toUpperCase();
     return field.toUpperCase();
@@ -12,12 +13,16 @@ export default function Table({ data, columns }) {
     <div>
       <table>
         <thead>
-          <tr></tr>
+          <tr>
+            {columns && columns.map((head) => (
+              <th> {getCaps(head.header, head.field)}</th>
+            ))}
+          </tr>
         </thead>
 
         <tbody>
-          {data.map((row) => (
-            <tr>
+          {data && data.map((row) => (
+            <tr className={`${hover && "hover"} ${striped && "striped"}`}>
               {columns.map((col) => (
                 <td>{row[col.field]}</td>
               ))}
@@ -25,7 +30,7 @@ export default function Table({ data, columns }) {
           ))}
         </tbody>
       </table>
-      {/* {data ? null : <p>No Row to show :)</p>} */}
+      {data ? null : <p>No Row to show :)</p>}
     </div>
   );
 }
